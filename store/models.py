@@ -1,12 +1,16 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 class customer(models.Model):
-    #User= models.OneToOneField(User, null=False,blank=True, on_delete=models.CASCADE)
+    user= models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name=models.CharField(max_length=200, null= True)
     email=models.CharField(max_length=200, null= True)
+    
     def __str__(self):
          return self.name
+
+
 class product(models.Model):
     name = models.CharField(max_length=100,null=True)
     price=models.FloatField()
@@ -15,6 +19,7 @@ class product(models.Model):
 
     def __str__(self):
         return self.name
+
     @property
     def imageURL(self):
         try:
@@ -22,6 +27,7 @@ class product(models.Model):
         except:
             url = ""
         return url
+
 
 class order(models.Model):
     customer = models.ForeignKey(customer, on_delete=models.SET_NULL,null=True,blank=True)
@@ -32,6 +38,7 @@ class order(models.Model):
     def __str__ (self):
         return str(self.id)
 
+
 class orderItem(models.Model):
     product= models.ForeignKey(product,on_delete=models.SET_NULL,null=True)
     order = models.ForeignKey(order,on_delete=models.SET_NULL, null=True)
@@ -40,6 +47,7 @@ class orderItem(models.Model):
 
     def __str__(self):
         return self.product
+
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(customer,on_delete= models.SET_NULL, null=True)
