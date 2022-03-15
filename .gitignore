@@ -1,0 +1,11 @@
+*.sqlite3
+__pycache__
+.vscode
+static/**/**/*.js
+./*/migrations/*.py
+!./*/migrations/__init__.py
+static/**/**/*.svg
+static/**/**/*.css
+static/**/**/*.png
+static/**/**/*.jpg
+static/**/**/*.woff
